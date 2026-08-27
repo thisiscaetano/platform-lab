@@ -37,7 +37,7 @@ spec:
               value: system
               effect: NoSchedule
     - repoURL: git@github.com:thisiscaetano/platform-lab.git
-      path: apps/karpenter
+      path: apps/karpenter/base
       targetRevision: HEAD
   destination:
     name: lab
