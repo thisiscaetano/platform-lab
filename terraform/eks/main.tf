@@ -5,6 +5,19 @@ module "eks" {
   name               = var.cluster_name
   kubernetes_version = var.cluster_version
   addons = {
+    metrics-server = {
+      configuration_values = jsonencode({
+        tolerations = [{
+          key      = "node-type"
+          operator = "Equal"
+          value    = "system"
+          effect   = "NoSchedule"
+        }]
+        nodeSelector = {
+          "node-type" = "system"
+        }
+      })
+    }
     coredns = {
       configuration_values = jsonencode({
         tolerations = [{
@@ -86,17 +99,19 @@ module "eks" {
       min_size       = 2
       max_size       = 4
       desired_size   = 2
-    }
-    labels = {
-      "node-type" = "system"
-    }
-    taints = {
-      dedicated = {
-        key    = "node-type"
-        value  = "system"
-        effect = "NO_SCHEDULE"
+
+      labels = {
+        "node-type" = "system"
+      }
+      taints = {
+        dedicated = {
+          key    = "node-type"
+          value  = "system"
+          effect = "NO_SCHEDULE"
+        }
       }
     }
+
   }
   # Optional
   endpoint_public_access = true
