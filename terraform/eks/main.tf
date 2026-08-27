@@ -5,27 +5,77 @@ module "eks" {
   name               = var.cluster_name
   kubernetes_version = var.cluster_version
   addons = {
+    coredns = {
+      configuration_values = jsonencode({
+        tolerations = [{
+          key      = "node-type"
+          operator = "Equal"
+          value    = "system"
+          effect   = "NoSchedule"
+        }]
+        nodeSelector = {
+          "node-type" = "system"
+        }
+      })
+    }
+
     aws-ebs-csi-driver = {
       pod_identity_association = [{
         role_arn        = aws_iam_role.ebs_csi.arn
         service_account = "ebs-csi-controller-sa"
       }]
+      configuration_values = jsonencode({
+        controller = {
+          tolerations = [{
+            key      = "node-type"
+            operator = "Equal"
+            value    = "system"
+            effect   = "NoSchedule"
+          }]
+          nodeSelector = {
+            "node-type" = "system"
+          }
+        }
+      })
     }
+
     aws-efs-csi-driver = {
       pod_identity_association = [{
         role_arn        = aws_iam_role.efs_csi.arn
         service_account = "efs-csi-controller-sa"
       }]
+      configuration_values = jsonencode({
+        controller = {
+          tolerations = [{
+            key      = "node-type"
+            operator = "Equal"
+            value    = "system"
+            effect   = "NoSchedule"
+          }]
+          nodeSelector = {
+            "node-type" = "system"
+          }
+        }
+      })
     }
-    eks-pod-identity-agent = {
-      before_compute = true
-    }
-    
-    metrics-server = {} 
-    coredns    = {}
-    kube-proxy = {}
+
     vpc-cni = {
       before_compute = true
+      configuration_values = jsonencode({
+        tolerations = [{
+          operator = "Exists"
+        }]
+      })
+    }
+    kube-proxy = {}
+
+    eks-pod-identity-agent = {
+      before_compute = true
+      configuration_values = jsonencode({
+        tolerations = [{
+          operator = "Exists"
+        }]
+      })
     }
   }
   eks_managed_node_groups = {
@@ -33,9 +83,19 @@ module "eks" {
       # Starting on 1.30, AL2023 is the default AMI type for EKS managed node groups
       ami_type       = "AL2023_x86_64_STANDARD"
       instance_types = var.instance_type
-      min_size     = 2
-      max_size     = 4
-      desired_size = 2
+      min_size       = 2
+      max_size       = 4
+      desired_size   = 2
+    }
+    labels = {
+      "node-type" = "system"
+    }
+    taints = {
+      dedicated = {
+        key    = "node-type"
+        value  = "system"
+        effect = "NO_SCHEDULE"
+      }
     }
   }
   # Optional
