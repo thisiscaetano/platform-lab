@@ -52,6 +52,3 @@ terraform apply -var="vpc_id=vpc-xxxx" -var='private_subnet_ids=["subnet-aaa","s
 ## Backend
 
 Estado armazenado no S3:
-- Bucket: `platform-lab-bucket`
-- Key: `run-infra/dev/eks/terraform.tfstate`
-- Região: `us-east-1`
