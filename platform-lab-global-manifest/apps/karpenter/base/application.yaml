@@ -21,21 +21,7 @@ spec:
               requests:
                 cpu: 250m
                 memory: 256Mi
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                      - key: node-type
-                        operator: In
-                        values:
-                          - system
 
-          tolerations:
-            - key: node-type
-              operator: Equal
-              value: system
-              effect: NoSchedule
     - repoURL: git@github.com:thisiscaetano/platform-lab.git
       path: platform-lab-global-manifest/apps/karpenter/base
       targetRevision: HEAD
