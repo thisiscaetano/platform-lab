@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: argocd
 resources:
 
-- platform-lab-global-manifest/apps/karpenter/base/application.yaml
+- /apps/karpenter/base/application.yaml
