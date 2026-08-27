@@ -20,6 +20,8 @@ module "eks" {
     eks-pod-identity-agent = {
       before_compute = true
     }
+    
+    metrics-server = {} 
     coredns    = {}
     kube-proxy = {}
     vpc-cni = {
@@ -30,8 +32,7 @@ module "eks" {
     default = {
       # Starting on 1.30, AL2023 is the default AMI type for EKS managed node groups
       ami_type       = "AL2023_x86_64_STANDARD"
-      instance_types = ["m6i.large", "c6a.large"]
-
+      instance_types = var.instance_type
       min_size     = 2
       max_size     = 4
       desired_size = 2

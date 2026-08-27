@@ -5,6 +5,10 @@ variable "cluster_name" {
 variable "cluster_version" {
   default = "1.36"
 }
+variable "instance_type"{
+  type = list(string)
+  default = ["t3.medium"]
+}
 variable "environment" {
   description = "Environment name (e.g. dev, staging, prod)"
   type        = string
