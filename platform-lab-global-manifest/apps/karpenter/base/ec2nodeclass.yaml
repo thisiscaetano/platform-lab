@@ -1,0 +1,31 @@
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: on-demand
+spec:
+  amiFamily: AL2023
+  instanceProfile: "karpenter-profile"
+
+  subnetSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: "observability-prd-eks-priv-01"
+
+  securityGroupSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: "observability-prd-eks-priv-01"
+
+  amiSelectorTerms:
+    - alias: al2023@latest
+
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 50Gi
+        volumeType: gp3
+        encrypted: true
+        deleteOnTermination: true
+
+  tags:
+    Name: karpenter-observability-prd-eks-priv-01
+    karpenter.sh/discovery: "observability-prd-eks-priv-01"
+    Environment: prd

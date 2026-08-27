@@ -1,9 +1,4 @@
-variable "account_id" {
-  default = ""
-}
-variable "oidc_id" {
-  default = ""
-}
+
 variable "aws_region" {
   default = "us-east-1"
 }
