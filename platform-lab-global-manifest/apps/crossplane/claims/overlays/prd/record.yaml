@@ -1,7 +1,7 @@
 apiVersion: dns.upjet-cloudflare.upbound.io/v1alpha1
 kind: Record
 metadata:
-  name: dns-istio-ingressgateway-lab
+  name: istio-ingressgateway-lab
   namespace: upbound-system
   annotations:
     argocd.argoproj.io/sync-wave: "1"
@@ -20,7 +20,7 @@ spec:
 apiVersion: dns.upjet-cloudflare.upbound.io/v1alpha1
 kind: Record
 metadata:
-  name: dns-argocd-lab
+  name: argocd-lab
   namespace: upbound-system
   annotations:
     argocd.argoproj.io/sync-wave: "1"
