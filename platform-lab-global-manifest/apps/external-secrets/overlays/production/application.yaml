@@ -16,7 +16,7 @@ spec:
             name: external-secrets-lab
     - repoURL: git@github.com:thisiscaetano/platform-lab.git
       targetRevision: HEAD
-      path: apps/external-secrets/overlays/production
+      path: platform-lab-global-manifest/apps/external-secrets/overlays/production
   destination:
     namespace: external-secrets
     name: lab 
