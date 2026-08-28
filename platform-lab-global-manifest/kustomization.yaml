@@ -4,3 +4,4 @@ namespace: argocd
 resources:
 
 - apps/karpenter/base/application.yaml
+- apps/external-secrets/overlays/production/application.yaml

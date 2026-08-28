@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-secrets
+spec:
+  project: default
+  sources:
+    - chart: external-secrets
+      repoURL: https://charts.external-secrets.io
+      targetRevision: 2.8.0
+      helm:
+        releaseName: external-secrets
+        values: |
+          serviceAccount:
+            create: false
+            name: external-secrets-lab
+    - repoURL: git@github.com:thisiscaetano/platform-lab.git
+      targetRevision: HEAD
+      path: apps/external-secrets/overlays/production
+  destination:
+    namespace: external-secrets
+    name: lab 
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
