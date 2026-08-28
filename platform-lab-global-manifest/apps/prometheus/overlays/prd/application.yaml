@@ -31,7 +31,7 @@ spec:
                   memory: 512Mi
     - repoURL: git@github.com:thisiscaetano/platform-lab.git
       targetRevision: HEAD
-      path: platform-lab-global-manifest/apps/prometheus/overlays/prd
+      path: platform-lab-global-manifest/apps/prometheus/overlays/prd/dashboard
   destination:
     name: lab
     namespace: obs
