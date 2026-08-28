@@ -7,8 +7,8 @@ metadata:
   namespace: upbound-system
 spec:
   credentials:
-    source: Secret
     secretRef:
+      key: credentials
       name: platform-lab-cloudflare
       namespace: upbound-system
-      key: api_token
+    source: Secret
