@@ -4,7 +4,7 @@ metadata:
   name: grafana-vs
 spec:
   hosts:
-  - "grafana.paulojuniosre.com.br"
+  - "grafana.paulojuniorsre.com.br"
   gateways:
     - istio-system/global-gateway
   http:
