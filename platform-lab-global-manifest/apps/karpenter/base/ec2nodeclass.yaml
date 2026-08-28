@@ -5,7 +5,12 @@ metadata:
 spec:
   amiFamily: AL2023
   instanceProfile: "karpenter-profile"
-
+  
+  metadataOptions:
+    httpEndpoint: enabled
+    httpProtocolIPv6: disabled
+    httpPutResponseHopLimit: 2
+    httpTokens: required
   subnetSelectorTerms:
     - tags:
         karpenter.sh/discovery: "observability-prd-eks-priv-01"
