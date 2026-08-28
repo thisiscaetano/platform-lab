@@ -5,7 +5,7 @@ metadata:
   namespace: web-app
 spec:
   hosts:
-  - "app.paulojuniosre.com.br"
+  - "app.paulojuniorsre.com.br"
   gateways:
     - istio-system/global-gateway
   http:
