@@ -11,6 +11,11 @@ spec:
     helm:
       releaseName: opentelemetry-operator
       values: |
+        admissionWebhooks:
+          certManager:
+            enabled: false
+          autoGenerateCert:
+            enabled: true
         manager:
           resources:
             limits:
