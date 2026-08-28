@@ -1,0 +1,14 @@
+apiVersion: upjet-cloudflare.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  name: cloudflare-provider-config
+  namespace: upbound-system
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: cloudflare-creds
+      namespace: upbound-system
+      key: api_token

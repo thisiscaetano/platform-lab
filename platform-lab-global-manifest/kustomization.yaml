@@ -10,3 +10,7 @@ resources:
 - apps/stakater-reloader/overlays/production/application.yaml
 - apps/otel/application.yaml
 - apps/prometheus/overlays/prd/application.yaml
+
+#CROSSPLANE
+- apps/crossplane/providers/overlays/prd/application.yaml
+- apps/crossplane/claims/overlays/prd/application.yaml
