@@ -32,6 +32,10 @@ spec:
     - repoURL: git@github.com:thisiscaetano/platform-lab.git
       targetRevision: HEAD
       path: platform-lab-global-manifest/apps/prometheus/overlays/prd/dashboard
+      
+    - repoURL: git@github.com:thisiscaetano/platform-lab.git
+      targetRevision: HEAD
+      path: platform-lab-global-manifest/apps/prometheus/overlays/prd
   destination:
     name: lab
     namespace: obs
