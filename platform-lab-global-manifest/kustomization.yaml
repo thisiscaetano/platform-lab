@@ -9,3 +9,4 @@ resources:
 - apps/web-app/overlays/prd/application.yaml
 - apps/stakater-reloader/overlays/production/application.yaml
 - apps/otel/application.yaml
+- apps/prometheus/overlays/prd/application.yaml
