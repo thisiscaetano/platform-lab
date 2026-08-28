@@ -1,22 +1,22 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: karpenter-test-2
-  namespace: karpenter
-spec:
-  replicas: 10
-  selector:
-    matchLabels:
-      app: karpenter-test-2
-  template:
-    metadata:
-      labels:
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: karpenter-test-2
+    namespace: karpenter
+  spec:
+    replicas: 10
+    selector:
+      matchLabels:
         app: karpenter-test-2
-    spec:
-      containers:
-        - name: karpenter-test-2
-          image: nginx
-          resources:
-            requests:
-              cpu: "8"
-              memory: "20Gi"
+    template:
+      metadata:
+        labels:
+          app: karpenter-test-2
+      spec:
+        containers:
+          - name: karpenter-test-2
+            image: nginx
+            resources:
+              requests:
+                cpu: "250m"
+                memory: "256MI"
