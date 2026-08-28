@@ -9,6 +9,6 @@ spec:
   credentials:
     source: Secret
     secretRef:
-      name: cloudflare-creds
+      name: platform-lab-cloudflare
       namespace: upbound-system
       key: api_token
