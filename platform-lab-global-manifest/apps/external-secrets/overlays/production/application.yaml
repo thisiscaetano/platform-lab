@@ -14,30 +14,6 @@ spec:
           serviceAccount:
             create: false
             name: external-secrets-lab
-
-          affinity: &affinity
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                      - key: node-type
-                        operator: In
-                        values:
-                          - system
-
-          tolerations: &tolerations
-            - key: node-type
-              operator: Equal
-              value: system
-              effect: NoSchedule
-
-          webhook:
-            affinity: *affinity
-            tolerations: *tolerations
-
-          certController:
-            affinity: *affinity
-          tolerations: *tolerations
     - repoURL: git@github.com:thisiscaetano/platform-lab.git
       targetRevision: HEAD
       path: platform-lab-global-manifest/apps/external-secrets/overlays/production
