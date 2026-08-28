@@ -7,3 +7,4 @@ resources:
 - apps/external-secrets/overlays/production/application.yaml
 - apps/istio/overlays/prd/application.yml
 - apps/web-app/overlays/prd/application.yaml
+- apps/stakater-reloader/overlays/production/application.yaml
