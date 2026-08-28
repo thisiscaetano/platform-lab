@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: web-app
+spec:
+  project: default
+  source:
+      repoURL: git@github.com:thisiscaetano/platform-lab.git
+      targetRevision: HEAD
+      path: platform-lab-global-manifest/apps/web-app/overlays/prd
+  destination:
+    namespace: web-app
+    name: lab
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

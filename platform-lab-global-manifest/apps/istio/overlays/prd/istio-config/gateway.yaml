@@ -12,10 +12,10 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - "*.paulosre.com.br"
+        - "*.paulojuniorsre.com.br"
     - port:
         number: 443
         name: https
         protocol: HTTP
       hosts:
-        - "*.paulosre.com.br"
+        - "*.paulojuniorsre.com.br"

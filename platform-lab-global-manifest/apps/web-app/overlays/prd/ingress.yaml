@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: web-app-vs
+  namespace: web-app
+spec:
+  hosts:
+  - "app.paulojuniosre.com.br"
+  gateways:
+    - istio-system/global-gateway
+  http:
+    - match:
+        - uri:
+            prefix: "/" # todas as requisições
+      route:
+        - destination:
+            host: web-app-svc
+            port:
+              number: 80

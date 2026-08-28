@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app-svc
+  namespace: web-app
+  labels:
+    app: web-app
+spec:
+  selector:
+    app: web-server
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80       
+      targetPort: 80 
