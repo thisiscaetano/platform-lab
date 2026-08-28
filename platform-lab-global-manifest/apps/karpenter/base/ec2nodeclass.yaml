@@ -1,7 +1,7 @@
 apiVersion: karpenter.k8s.aws/v1
 kind: EC2NodeClass
 metadata:
-  name: spot
+  name: ondemand
 spec:
   amiFamily: AL2023
   instanceProfile: "KarpenterProfile"
@@ -11,6 +11,7 @@ spec:
     httpProtocolIPv6: disabled
     httpPutResponseHopLimit: 2
     httpTokens: required
+
   subnetSelectorTerms:
     - tags:
         karpenter.sh/discovery: "observability-prd-eks-priv-01"
