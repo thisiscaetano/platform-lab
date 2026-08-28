@@ -99,6 +99,11 @@ module "eks" {
       min_size       = 2
       max_size       = 4
       desired_size   = 2
+      metadata_options = {
+        http_endpoint               = "enabled"
+        http_tokens                 = "required"
+        http_put_response_hop_limit = 2
+      }
 
       labels = {
         "node-type" = "system"
@@ -120,8 +125,7 @@ module "eks" {
   enable_cluster_creator_admin_permissions = true
 
   compute_config = {
-    enabled    = true
-    node_pools = ["general-purpose"]
+    enabled    = false
   }
 
   vpc_id     = var.vpc_id
@@ -183,6 +187,23 @@ resource "helm_release" "argocd" {
   namespace  = "argocd"
 
   create_namespace = true
+
+  values = [
+    yamlencode({
+      global = {
+        nodeSelector = {
+          "kubernetes.io/os" = "linux"
+          "node-type"        = "system"
+        }
+        tolerations = [{
+          key      = "node-type"
+          operator = "Equal"
+          value    = "system"
+          effect   = "NoSchedule"
+        }]
+      }
+    })
+  ]
 
   depends_on = [module.eks]
 }
