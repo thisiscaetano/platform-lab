@@ -54,3 +54,22 @@ spec:
     zoneId: "83ea4522d0e2006fcf523a2853f23c47"
   providerConfigRef:
     name: cloudflare-provider-config
+---
+apiVersion: dns.upjet-cloudflare.upbound.io/v1alpha1
+kind: Record
+metadata:
+  name: web-app-lab
+  namespace: upbound-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  forProvider:
+    name: app
+    type: CNAME
+    content: "istio-ingressgateway-lab.paulojuniorsre.com.br"
+    comment: "DNS record for web app environment lab"
+    proxied: true
+    ttl: 1
+    zoneId: "83ea4522d0e2006fcf523a2853f23c47"
+  providerConfigRef:
+    name: cloudflare-provider-config
