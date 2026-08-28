@@ -4,8 +4,8 @@ metadata:
   name: spot
 spec:
   amiFamily: AL2023
-  instanceProfile: "karpenter-profile"
-  
+  instanceProfile: "KarpenterProfile"
+
   metadataOptions:
     httpEndpoint: enabled
     httpProtocolIPv6: disabled
