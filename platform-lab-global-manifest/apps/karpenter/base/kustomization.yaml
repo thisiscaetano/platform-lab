@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
 - ec2nodeclass.yaml
 - nodepool.yaml
-- pod-teste.yaml
+#- pod-teste.yaml
