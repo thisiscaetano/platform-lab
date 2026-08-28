@@ -7,7 +7,7 @@ variable "cluster_version" {
 }
 variable "instance_type" {
   type    = list(string)
-  default = ["t3.medium"]
+  default = ["m5.xlarge"]
 }
 variable "environment" {
   description = "Environment name (e.g. dev, staging, prod)"

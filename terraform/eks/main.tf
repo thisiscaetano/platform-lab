@@ -4,52 +4,16 @@ module "eks" {
 
   name               = var.cluster_name
   kubernetes_version = var.cluster_version
+
   addons = {
-    metrics-server = {
-      configuration_values = jsonencode({
-        tolerations = [{
-          key      = "node-type"
-          operator = "Equal"
-          value    = "system"
-          effect   = "NoSchedule"
-        }]
-        nodeSelector = {
-          "node-type" = "system"
-        }
-      })
-    }
-    coredns = {
-      configuration_values = jsonencode({
-        tolerations = [{
-          key      = "node-type"
-          operator = "Equal"
-          value    = "system"
-          effect   = "NoSchedule"
-        }]
-        nodeSelector = {
-          "node-type" = "system"
-        }
-      })
-    }
+     metrics-server = {}
+    coredns = {}
 
     aws-ebs-csi-driver = {
       pod_identity_association = [{
         role_arn        = aws_iam_role.ebs_csi.arn
         service_account = "ebs-csi-controller-sa"
       }]
-      configuration_values = jsonencode({
-        controller = {
-          tolerations = [{
-            key      = "node-type"
-            operator = "Equal"
-            value    = "system"
-            effect   = "NoSchedule"
-          }]
-          nodeSelector = {
-            "node-type" = "system"
-          }
-        }
-      })
     }
 
     aws-efs-csi-driver = {
@@ -57,79 +21,43 @@ module "eks" {
         role_arn        = aws_iam_role.efs_csi.arn
         service_account = "efs-csi-controller-sa"
       }]
-      configuration_values = jsonencode({
-        controller = {
-          tolerations = [{
-            key      = "node-type"
-            operator = "Equal"
-            value    = "system"
-            effect   = "NoSchedule"
-          }]
-          nodeSelector = {
-            "node-type" = "system"
-          }
-        }
-      })
+      
     }
 
     vpc-cni = {
       before_compute = true
-      configuration_values = jsonencode({
-        tolerations = [{
-          operator = "Exists"
-        }]
-      })
+     
     }
     kube-proxy = {}
 
     eks-pod-identity-agent = {
       before_compute = true
-      configuration_values = jsonencode({
-        tolerations = [{
-          operator = "Exists"
-        }]
-      })
+      
     }
   }
-  eks_managed_node_groups = {
-    default = {
-      # Starting on 1.30, AL2023 is the default AMI type for EKS managed node groups
-      ami_type       = "AL2023_x86_64_STANDARD"
-      instance_types = var.instance_type
-      min_size       = 2
-      max_size       = 4
-      desired_size   = 2
-      metadata_options = {
-        http_endpoint               = "enabled"
-        http_tokens                 = "required"
-        http_put_response_hop_limit = 2
-      }
 
-      labels = {
-        "node-type" = "system"
-      }
-      taints = {
-        dedicated = {
-          key    = "node-type"
-          value  = "system"
-          effect = "NO_SCHEDULE"
-        }
-      }
-    }
-
-  }
   # Optional
   endpoint_public_access = true
 
   # Optional: Adds the current caller identity as an administrator via cluster access entry
   enable_cluster_creator_admin_permissions = true
 
-  compute_config = {
-    enabled    = false
-  }
-
   vpc_id     = var.vpc_id
   subnet_ids = var.private_subnet_ids
+  control_plane_subnet_ids = var.private_subnet_ids
+
+  # EKS Managed Node Group(s)
+  eks_managed_node_groups = {
+    example = {
+      # Starting on 1.30, AL2023 is the default AMI type for EKS managed node groups
+      ami_type       = "AL2023_x86_64_STANDARD"
+      instance_types = var.instance_type
+
+      min_size     = 2
+      max_size     = 10
+      desired_size = 2
+    }
+  }
 
   tags = {
     Environment = "lab"
@@ -146,6 +74,7 @@ data "aws_iam_policy_document" "ebs_csi_assume" {
     }
   }
 }
+
 #iam ebs
 resource "aws_iam_role" "ebs_csi" {
   name               = "${var.cluster_name}-ebs-csi-driver"
@@ -188,22 +117,6 @@ resource "helm_release" "argocd" {
 
   create_namespace = true
 
-  values = [
-    yamlencode({
-      global = {
-        nodeSelector = {
-          "kubernetes.io/os" = "linux"
-          "node-type"        = "system"
-        }
-        tolerations = [{
-          key      = "node-type"
-          operator = "Equal"
-          value    = "system"
-          effect   = "NoSchedule"
-        }]
-      }
-    })
-  ]
 
   depends_on = [module.eks]
 }
