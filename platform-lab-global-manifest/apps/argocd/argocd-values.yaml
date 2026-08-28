@@ -1,0 +1,19 @@
+configs:
+  cm:
+    timeout.reconciliation: 10s
+    users.anonymous.enabled: "true"
+  params:
+    server.insecure: "true"
+dex:
+  enabled: false
+
+server:
+  ingress:
+    enabled: false
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "500m"
