@@ -11,6 +11,7 @@ spec:
       helm:
         values: |
           replicas: 1
+          logLevel: debug 
           settings:
             clusterName: platform-lab
           serviceAccount:
