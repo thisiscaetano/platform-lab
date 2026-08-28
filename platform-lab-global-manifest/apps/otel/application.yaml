@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: opentelemetry-operator
+spec:
+  project: default
+  source:
+    chart: open-telemetry
+    repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
+    helm:
+      releaseName: opentelemetry-operator
+      values: |
+          deployment: 
+            resources:
+              limits:
+                cpu: 50m
+                memory: 64Mi
+              requests:
+                cpu: 25m
+                memory: 32Mi
+
+  destination:
+    namespace: obs
+    name: lab
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

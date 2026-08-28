@@ -8,3 +8,4 @@ resources:
 - apps/istio/overlays/prd/application.yml
 - apps/web-app/overlays/prd/application.yaml
 - apps/stakater-reloader/overlays/production/application.yaml
+- apps/otel/application.yaml
