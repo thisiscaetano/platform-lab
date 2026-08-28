@@ -11,6 +11,8 @@ spec:
     helm:
       releaseName: kube-prometheus-stack
       values: |
+        crds:
+          enabled: false
         grafana:
           enabled: true
         prometheus:
@@ -31,4 +33,26 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-operator-crds
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: prometheus-operator-crds
+    targetRevision: 31.0.1
+  destination:
+    name: lab
+    namespace: obs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
       - ServerSideApply=true
+      - CreateNamespace=true
