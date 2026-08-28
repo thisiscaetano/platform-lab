@@ -4,26 +4,34 @@ metadata:
   name: kube-prometheus-stack
 spec:
   project: default
-  source:
-    repoURL: https://prometheus-community.github.io/helm-charts
-    chart: kube-prometheus-stack
-    targetRevision: 88.6.1
-    helm:
-      releaseName: kube-prometheus-stack
-      values: |
-        crds:
-          enabled: false
-        grafana:
-          enabled: true
-        prometheus:
-          prometheusSpec:
-            resources:
-              requests:
-                cpu: 100m
-                memory: 256Mi
-              limits:
-                cpu: 200m
-                memory: 512Mi
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      chart: kube-prometheus-stack
+      targetRevision: 88.6.1
+      helm:
+        releaseName: kube-prometheus-stack
+        values: |
+          crds:
+            enabled: false
+          grafana:
+            enabled: true
+            sidecar:
+              dashboards:
+                enabled: true
+                label: grafana_dashboard
+                labelValue: "1"
+          prometheus:
+            prometheusSpec:
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+                limits:
+                  cpu: 200m
+                  memory: 512Mi
+    - repoURL: git@github.com:thisiscaetano/platform-lab.git
+      targetRevision: HEAD
+      path: platform-lab-global-manifest/apps/prometheus/overlays/prd
   destination:
     name: lab
     namespace: obs
