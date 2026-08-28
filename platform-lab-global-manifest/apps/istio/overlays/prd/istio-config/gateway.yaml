@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: global-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway-prd
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*.paulosre.com.br"
+    - port:
+        number: 443
+        name: https
+        protocol: HTTP
+      hosts:
+        - "*.paulosre.com.br"

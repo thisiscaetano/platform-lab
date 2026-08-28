@@ -5,3 +5,4 @@ resources:
 
 #- apps/karpenter/base/application.yaml
 - apps/external-secrets/overlays/production/application.yaml
+- apps/istio/overlays/prd/application.yml
