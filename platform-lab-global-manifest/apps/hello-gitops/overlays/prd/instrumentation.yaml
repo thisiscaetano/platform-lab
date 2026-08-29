@@ -5,7 +5,7 @@ metadata:
 spec:
   exporter:
     # endpoint do seu OTel Collector (ajuste para o service dele)
-    endpoint: http://otel-collector.observability.svc.cluster.local:4317
+    endpoint: http://otel-collector-collector.obs.svc.cluster.local:4317
   propagators:
     - tracecontext
     - baggage
