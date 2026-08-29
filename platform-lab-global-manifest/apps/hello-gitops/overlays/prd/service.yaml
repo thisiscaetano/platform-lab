@@ -1,8 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-gitops
-  namespace: hello-gitops
+  name: hello-gitops-svc
   labels:
     app: hello-gitops
 spec:

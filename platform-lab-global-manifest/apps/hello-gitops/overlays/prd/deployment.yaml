@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-gitops
-  namespace: hello-gitops
   labels:
     app: hello-gitops
 spec:

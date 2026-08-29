@@ -1,8 +1,7 @@
 apiVersion: opentelemetry.io/v1alpha1
 kind: Instrumentation
 metadata:
-  name: python-instrumentation
-  namespace: hello-gitops
+  name: hello-gitops-instrumentation
 spec:
   exporter:
     # endpoint do seu OTel Collector (ajuste para o service dele)
