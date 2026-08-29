@@ -5,11 +5,11 @@ metadata:
 spec:
   project: default
   source:
-    chart: grafana
+    chart: loki
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 7.3.0
+    targetRevision: 6.6.4
     helm:
-      releaseName: grafana
+      releaseName: loki
       values: |
         deploymentMode: SingleBinary
         loki:
@@ -43,7 +43,7 @@ spec:
           replicas: 0
         write:
           replicas: 0
-          
+
         gateway:
           enabled: true
   destination:
@@ -54,4 +54,4 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
