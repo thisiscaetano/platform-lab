@@ -11,7 +11,7 @@ resources:
 - apps/otel/application.yaml
 - apps/prometheus/overlays/prd/application.yaml
 - apps/argocd/application.yaml
-- apps/hello-gitops/application.yaml
+- apps/hello-gitops/overlays/prd/application.yaml
 
 #CROSSPLANE
 - apps/crossplane/providers/overlays/prd/application.yaml
