@@ -12,7 +12,7 @@ resources:
 - apps/prometheus/overlays/prd/application.yaml
 - apps/argocd/application.yaml
 - apps/hello-gitops/overlays/prd/application.yaml
-
+- apps/loki/overlays/prd/application.yaml
 #CROSSPLANE
 - apps/crossplane/providers/overlays/prd/application.yaml
 - apps/crossplane/claims/overlays/prd/application.yaml
