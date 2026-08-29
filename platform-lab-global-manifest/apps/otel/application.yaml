@@ -4,28 +4,31 @@ metadata:
   name: opentelemetry-operator
 spec:
   project: default
-  source:
-    chart: opentelemetry-operator
-    repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
-    targetRevision: 0.122.0
-    helm:
-      releaseName: opentelemetry-operator
-      values: |
-        admissionWebhooks:
-          certManager:
-            enabled: false
-          autoGenerateCert:
-            enabled: true
-            recreate: true
-        manager:
-          resources:
-            limits:
-              cpu: 100m
-              memory: 128Mi
-            requests:
-              cpu: 50m
-              memory: 64Mi
+  sources:
+    - chart: opentelemetry-operator
+      repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
+      targetRevision: 0.122.0
+      helm:
+        releaseName: opentelemetry-operator
+        values: |
+          admissionWebhooks:
+            certManager:
+              enabled: false
+            autoGenerateCert:
+              enabled: true
+              recreate: true
+          manager:
+            resources:
+              limits:
+                cpu: 100m
+                memory: 128Mi
+              requests:
+                cpu: 50m
+                memory: 64Mi
 
+    - repoURL: git@github.com:thisiscaetano/platform-lab.git
+      targetRevision: HEAD
+      path: platform-lab-global-manifest/apps/otel
   destination:
     namespace: obs
     name: lab
