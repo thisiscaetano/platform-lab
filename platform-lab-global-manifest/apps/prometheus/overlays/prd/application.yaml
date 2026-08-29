@@ -19,7 +19,7 @@ spec:
               - name: Loki
                 type: loki
                 access: proxy
-                url: http://loki-gateway.obs.svc.cluster.local
+                url: http://grafana.obs.svc.cluster.local
                 isDefault: false
                 jsonData:
                   maxLines: 1000
