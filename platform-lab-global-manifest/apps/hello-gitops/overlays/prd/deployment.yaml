@@ -25,6 +25,8 @@ spec:
           env:
             - name: APP_VERSION
               value: "v1"
+            - name: OTEL_SERVICE_NAME
+              value: "hello-gitops"
             - name: APP_SECRET_MESSAGE
               valueFrom:
                 secretKeyRef:
