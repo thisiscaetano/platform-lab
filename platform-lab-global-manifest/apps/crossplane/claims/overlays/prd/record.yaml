@@ -83,7 +83,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"
 spec:
   forProvider:
-    name: app
+    name: hello
     type: CNAME
     content: "istio-ingressgateway-lab.paulojuniorsre.com.br"
     comment: "DNS record for hello gitops environment lab"
