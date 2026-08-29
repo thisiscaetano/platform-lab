@@ -43,6 +43,8 @@ spec:
           replicas: 0
         write:
           replicas: 0
+        gateway:
+          enabled: true
   destination:
     namespace: obs
     name: lab
