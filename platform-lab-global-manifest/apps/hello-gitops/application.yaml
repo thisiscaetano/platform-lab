@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-gitops
+spec:
+  project: default
+  source:
+      repoURL: git@github.com:thisiscaetano/platform-lab.git
+      targetRevision: HEAD
+      path: platform-lab-global-manifest/apps/hello-gitops/overlays/prd
+  destination:
+    namespace: hello-gitops
+    name: lab
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
