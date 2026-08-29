@@ -61,7 +61,7 @@ data "aws_iam_policy_document" "gitops_assume_role" {
 
       values = [
         for repo in var.github_repositories :
-        "repo:${var.github_org}/${repo}:*"
+        "repo:${var.github_org}*/${repo}*:*"
       ]
     }
   }
