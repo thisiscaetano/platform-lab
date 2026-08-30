@@ -4,7 +4,7 @@
     name: karpenter-test-2
     namespace: karpenter
   spec:
-    replicas: 30
+    replicas: 130
     selector:
       matchLabels:
         app: karpenter-test-2
