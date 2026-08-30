@@ -21,4 +21,4 @@ configMapGenerator:
 images:
 - name: image-set
   newName: 017820664539.dkr.ecr.us-east-1.amazonaws.com/hello-gitops
-  newTag: 1f05844
+  newTag: 17ad1ec
