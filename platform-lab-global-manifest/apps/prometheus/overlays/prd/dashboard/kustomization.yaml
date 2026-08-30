@@ -11,3 +11,10 @@ configMapGenerator:
       labels:
         grafana_dashboard: "1"
       disableNameSuffixHash: true
+  - name: k8s-basico
+    files:
+      - k8s.json
+    options:
+      labels:
+        grafana_dashboard: "1"
+      disableNameSuffixHash: true
