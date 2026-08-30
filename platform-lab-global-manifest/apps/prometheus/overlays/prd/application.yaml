@@ -28,6 +28,7 @@ spec:
                 enabled: true
                 label: grafana_dashboard
                 labelValue: "1"
+                searchNamespace: ALL
           prometheus:
             prometheusSpec:
               resources:

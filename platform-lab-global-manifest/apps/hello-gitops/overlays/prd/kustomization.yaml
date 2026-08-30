@@ -9,6 +9,15 @@ resources:
 - service.yaml
 - ingress.yaml
 
+configMapGenerator:
+- name: hello-gitops-dashboard
+  files:
+  - dashboard.json
+  options:
+    disableNameSuffixHash: true
+    labels:
+      grafana_dashboard: "1"
+ 
 images:
 - name: image-set
   newName: 017820664539.dkr.ecr.us-east-1.amazonaws.com/hello-gitops
