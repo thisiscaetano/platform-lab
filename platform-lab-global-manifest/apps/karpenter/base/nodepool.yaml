@@ -1,14 +1,14 @@
 apiVersion: karpenter.sh/v1
 kind: NodePool
 metadata:
-  name: ondemand-pool
+  name: spot-pool
 spec:
   template:
     spec:
       nodeClassRef:
         group: karpenter.k8s.aws
         kind: EC2NodeClass
-        name: ondemand
+        name: spot
       requirements:
         - key: kubernetes.io/arch
           operator: In
@@ -21,7 +21,7 @@ spec:
 
         - key: karpenter.sh/capacity-type
           operator: In
-          values: ["on-demand"]
+          values: ["spot"]
 
         - key: node.kubernetes.io/instance-type
           operator: In
