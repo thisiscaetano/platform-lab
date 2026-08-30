@@ -13,6 +13,12 @@ spec:
     env:
       - name: OTEL_EXPORTER_OTLP_PROTOCOL
         value: "http/protobuf"
+      - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+        value: "http://otel-collector-collector.obs.svc.cluster.local:4318/v1/traces"
+      - name: OTEL_EXPORTER_OTLP_METRICS_ENDPOINT
+        value: "http://otel-collector-collector.obs.svc.cluster.local:4318/v1/metrics"
+      - name: OTEL_EXPORTER_OTLP_LOGS_ENDPOINT
+        value: "http://otel-collector-collector.obs.svc.cluster.local:4318/v1/logs"
       - name: OTEL_LOGS_EXPORTER
         value: "otlp"
       - name: OTEL_METRICS_EXPORTER
