@@ -10,9 +10,9 @@ resources:
 - ingress.yaml
 
 configMapGenerator:
-- name: hello-gitops-dashboard
-  files:
+- files:
   - dashboard.json
+  name: hello-gitops-dashboard
   options:
     disableNameSuffixHash: true
     labels:
@@ -21,4 +21,4 @@ configMapGenerator:
 images:
 - name: image-set
   newName: 017820664539.dkr.ecr.us-east-1.amazonaws.com/hello-gitops
-  newTag: dc826cc
+  newTag: 1f05844
