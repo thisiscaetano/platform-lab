@@ -17,10 +17,10 @@ spec:
           serviceAccount:
             create: true
             name: karpenter
-          env:
-            - name: AWS_REGION
-              value: "us-east-1"
           controller:
+            env:
+              - name: AWS_REGION
+                value: "us-east-1"
             resources:
               requests:
                 cpu: 250m
