@@ -11,6 +11,8 @@ spec:
     - baggage
   python:
     env:
+      - name: OTEL_EXPORTER_OTLP_PROTOCOL
+        value: "grpc"
       - name: OTEL_LOGS_EXPORTER
         value: "otlp"
       - name: OTEL_METRICS_EXPORTER
