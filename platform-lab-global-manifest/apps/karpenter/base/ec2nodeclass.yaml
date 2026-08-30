@@ -1,7 +1,7 @@
 apiVersion: karpenter.k8s.aws/v1
 kind: EC2NodeClass
 metadata:
-  name: ondemand
+  name: spot
 spec:
   amiFamily: AL2023
   instanceProfile: "KarpenterProfile"
@@ -30,6 +30,6 @@ spec:
         deleteOnTermination: true
 
   tags:
-    Name: karpenter-observability-prd-eks-priv-01
-    karpenter.sh/discovery: "observability-prd-eks-priv-01"
+    Name: karpenter-platform-lab-spot
+    karpenter.sh/discovery: platform-lab
     Environment: prd
