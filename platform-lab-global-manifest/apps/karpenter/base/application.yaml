@@ -17,6 +17,9 @@ spec:
           serviceAccount:
             create: true
             name: karpenter
+          nodeSelector:
+            eks.amazonaws.com/nodegroup: example-6594c0c00d58453f81f48c94b9
+
           controller:
             env:
               - name: AWS_REGION
