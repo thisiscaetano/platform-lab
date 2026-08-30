@@ -14,12 +14,10 @@ spec:
 
   subnetSelectorTerms:
     - tags:
-        karpenter.sh/discovery: "observability-prd-eks-priv-01"
-
+        karpenter.sh/discovery: platform-lab
   securityGroupSelectorTerms:
     - tags:
-        karpenter.sh/discovery: "observability-prd-eks-priv-01"
-
+        karpenter.sh/discovery: platform-lab
   amiSelectorTerms:
     - alias: al2023@latest
 
