@@ -11,44 +11,6 @@ Provisiona um cluster EKS com addons gerenciados e ArgoCD via Helm.
 - IAM Roles via Pod Identity para EBS e EFS CSI drivers
 - ArgoCD (chart `argo-cd` v10.4.0) no namespace `argocd`
 
-## Node Group — Label e Taint
-
-O node group `default` possui uma **label** e um **taint** configurados para isolar cargas de trabalho de sistema.
-
-### Label
-
-```hcl
-labels = {
-  "node-type" = "system"
-}
-```
-
-Labels são metadados chave-valor atribuídos aos nós. Elas permitem que pods sejam direcionados a nós específicos usando `nodeSelector` ou `nodeAffinity`. Neste caso, qualquer pod que declare `nodeSelector: node-type: system` será elegível para rodar nesses nós.
-
-### Taint
-
-```hcl
-taints = {
-  dedicated = {
-    key    = "node-type"
-    value  = "system"
-    effect = "NO_SCHEDULE"
-  }
-}
-```
-
-Taints funcionam como o inverso das labels: em vez de atrair pods, eles **repelem**. Com `NO_SCHEDULE`, nenhum pod será agendado nesses nós a menos que tenha uma **toleration** correspondente. Isso garante que apenas componentes de sistema (addons, controllers) rodem nesses nós, evitando que workloads de aplicação consumam esses recursos.
-
-Para um pod tolerar esse taint:
-
-```yaml
-tolerations:
-  - key: "node-type"
-    operator: "Equal"
-    value: "system"
-    effect: "NoSchedule"
-```
-
 ## Addons
 
 Todos os addons com controllers (`coredns`, `aws-ebs-csi-driver`, `aws-efs-csi-driver`) são configurados com `tolerations` e `nodeSelector` apontando para os nós `node-type: system`, garantindo que rodem nos nós dedicados de sistema.
