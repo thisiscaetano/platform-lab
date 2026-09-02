@@ -36,15 +36,15 @@ spec:
             enabled: true
             size: 10Gi
             storageClass: gp2
-            
-          chunksCache:
-            resources:
-              requests:
-                cpu: 100m
-                memory: 512Mi
-              limits:
-                cpu: 500m
-                memory: 1Gi
+
+        chunksCache:
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
 
         # zera os componentes no SingleBinary
         backend:
